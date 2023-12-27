@@ -29,7 +29,7 @@ public class UserController {
         return userRepository.findAll();
     }
 
-    //
+    //유저 ID 조회 및 예외처리
     @GetMapping("/users/{id}")
     User getUserById(@PathVariable Long id){
         //유저가 없을 경우 예외처리
