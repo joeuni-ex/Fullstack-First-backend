@@ -1,5 +1,6 @@
 package com.mysite.backend.controller;
 
+import com.mysite.backend.exception.UserNotFoundException;
 import com.mysite.backend.model.User;
 import com.mysite.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +27,13 @@ public class UserController {
     @GetMapping("/users")
     List<User> getAllUsers(){
         return userRepository.findAll();
+    }
+
+    //
+    @GetMapping("/users/{id}")
+    User getUserById(@PathVariable Long id){
+        //유저가 없을 경우 예외처리
+        return userRepository.findById(id).orElseThrow(()-> new UserNotFoundException(id));
     }
 
 }
