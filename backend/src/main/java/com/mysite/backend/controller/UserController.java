@@ -47,4 +47,13 @@ public class UserController {
         }).orElseThrow(()-> new UserNotFoundException((id)));//예외 처리
     }
 
+    //유저 삭제
+    @DeleteMapping("/users/{id}")
+    String deleteUser(@PathVariable Long id){
+        if(!userRepository.existsById(id)){ //DB에 ID가 있으면 true,없으면 false
+           throw new UserNotFoundException(id);//예외 처리
+        }
+        userRepository.deleteById(id);//DB에서 유저 삭제하기
+        return "유저 아이디: "+id+"는 삭제 되었습니다.";
+    }
 }
