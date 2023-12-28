@@ -56,4 +56,10 @@ public class UserController {
         userRepository.deleteById(id);//DB에서 유저 삭제하기
         return "유저 아이디: "+id+"는 삭제 되었습니다.";
     }
+
+    //유저 검색하기
+    @GetMapping("/searchUser")
+    List<User> searchUser(@RequestParam String search){
+        return userRepository.findByNameContainsOrUsernameContains(search, search);
+    }
 }
